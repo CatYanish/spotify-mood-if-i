@@ -14,6 +14,9 @@ const PostLink = ({ post }) => (
     <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
       <a>{post.title}</a>
     </Link>
+    <div id="login">
+      <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+    </div>
     <style jsx>{`
       li {
         list-style: none;
