@@ -28,9 +28,9 @@ class Blog extends React.Component {
 
     const params = getHashParams();
 
-    this.setState({ triedToLogIn: true, accessToken: params.access_token, error: params.error })
+    this.setState({ triedToLogIn: params.error, accessToken: params.access_token, error: params.error })
     if (params.access_token) {
-      Router.push('/about')
+      Router.push(`/playlists/${params.access_token}`);
     }
 
   }
@@ -42,7 +42,7 @@ class Blog extends React.Component {
         <div id="login">
           <a href="/login" onClick={this.handleLogin} className="btn btn-primary">Log in with Spotify</a>
         </div>
-        { this.state.error !== null &&
+        { this.state.error !== null && this.state.triedToLogIn === true &&
           <div>
             Login was not successful, please try again or come back later
           </div>

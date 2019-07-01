@@ -15,9 +15,9 @@ app
     const server = express()
     server.use(cookieParser());
 
-    server.get('/p/:id', (req, res) => {
-      const actualPage = '/post'
-      const queryParams = { id: req.params.id }
+    server.get('/playlists/:token', (req, res) => {
+      const actualPage = '/playlists'
+      const queryParams = { token: req.params.token }
       app.render(req, res, actualPage, queryParams)
     })
 
