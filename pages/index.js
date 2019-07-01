@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../components/MyLayout.js'
 import Link from 'next/link'
-import { withRouter } from 'next/router';
+import Router, { withRouter } from 'next/router';
 
 
 class Blog extends React.Component {
@@ -29,33 +29,28 @@ class Blog extends React.Component {
     const params = getHashParams();
 
     this.setState({ triedToLogIn: true, accessToken: params.access_token, error: params.error })
+    if (params.access_token) {
+      Router.push('/about')
+    }
+
   }
 
 
   render() {
-    const { router } = this.props
-    console.log(this.state.triedToLogIn);
-    console.log(this.state.accessToken);
-
     return (
       <Layout>
-        <h1>My Blog</h1>
         <div id="login">
           <a href="/login" onClick={this.handleLogin} className="btn btn-primary">Log in with Spotify</a>
         </div>
+        { this.state.error !== null &&
+          <div>
+            Login was not successful, please try again or come back later
+          </div>
+        }
         <style jsx>{`
           h1,
           a {
             font-family: 'Arial';
-          }
-
-          ul {
-            padding: 0;
-          }
-
-          li {
-            list-style: none;
-            margin: 5px 0;
           }
 
           a {
