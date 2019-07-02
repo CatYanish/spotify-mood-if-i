@@ -20,7 +20,7 @@ constructor(props) {
 
     return  (
           <Layout>
-             <p>Playlist</p>
+             <p>Playlists</p>
           </Layout>
       )
   }

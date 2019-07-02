@@ -16,6 +16,8 @@ class Blog extends React.Component {
 
   componentDidMount (props) {
     function getHashParams() {
+
+      // TODO: move API reqs to server side 
       const hashParams = {};
       let e, r = /([^&;=]+)=?([^&;]*)/g,
           q = window.location.hash.substring(1);
