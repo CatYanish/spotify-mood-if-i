@@ -5,7 +5,7 @@ import Router, { withRouter } from 'next/router';
 
 export default class Playlists extends React.Component {
   static async getInitialProps({ query }) {
-    console.log('token', query.token)
+
     return {}
   }
 
@@ -14,6 +14,11 @@ constructor(props) {
   this.state = {
 
   }
+}
+
+
+componentDidMount (props) {
+  
 }
 
   render () {

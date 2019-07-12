@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var keys = require('./keys')
 var request = require('request'); // "Request" library
 
+
 app
   .prepare()
   .then(() => {
@@ -109,11 +110,13 @@ app
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        res.redirect('/playlists'
+        //+
+          // querystring.stringify({
+          //   access_token: access_token,
+          //   refresh_token: refresh_token
+          // })
+        );
       } else {
         res.redirect('/#' +
           querystring.stringify({

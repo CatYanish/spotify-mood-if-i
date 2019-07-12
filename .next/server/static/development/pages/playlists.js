@@ -1476,10 +1476,9 @@ function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 query = _ref.query;
-                console.log('token', query.token);
                 return _context.abrupt("return", {});
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -1506,9 +1505,12 @@ function (_React$Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__["default"])(Playlists, [{
+    key: "componentDidMount",
+    value: function componentDidMount(props) {}
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MyLayout_js__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, "Playlist"));
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_MyLayout_js__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("p", null, "Playlists"));
     }
   }]);
 

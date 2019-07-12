@@ -14,29 +14,6 @@ class Blog extends React.Component {
     }
   }
 
-  componentDidMount (props) {
-    function getHashParams() {
-
-      // TODO: move API reqs to server side 
-      const hashParams = {};
-      let e, r = /([^&;=]+)=?([^&;]*)/g,
-          q = window.location.hash.substring(1);
-      while ( e = r.exec(q)) {
-         hashParams[e[1]] = decodeURIComponent(e[2]);
-      }
-      return hashParams;
-    }
-
-
-    const params = getHashParams();
-
-    this.setState({ triedToLogIn: params.error, accessToken: params.access_token, error: params.error })
-    if (params.access_token) {
-      Router.push(`/playlists/${params.access_token}`);
-    }
-
-  }
-
 
   render() {
     return (
