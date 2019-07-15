@@ -2,6 +2,7 @@ import Layout from '../components/MyLayout.js'
 import React from 'react'
 import Link from 'next/link'
 import Router, { withRouter } from 'next/router';
+import { STATE_KEY } from '../constants';
 
 export default class Playlists extends React.Component {
   static async getInitialProps({ query }) {
@@ -18,7 +19,7 @@ constructor(props) {
 
 
 componentDidMount (props) {
-  
+  console.log(localStorage.getItem(STATE_KEY));
 }
 
   render () {

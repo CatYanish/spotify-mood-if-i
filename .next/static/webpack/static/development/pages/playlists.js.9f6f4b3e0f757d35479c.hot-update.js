@@ -84,7 +84,9 @@ function (_React$Component) {
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__["default"])(Playlists, [{
     key: "componentDidMount",
-    value: function componentDidMount(props) {}
+    value: function componentDidMount(props) {
+      console.log(localStorage);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -100,4 +102,4 @@ function (_React$Component) {
 /***/ })
 
 })
-//# sourceMappingURL=playlists.js.ec65f8e13adbb63269fe.hot-update.js.map
+//# sourceMappingURL=playlists.js.9f6f4b3e0f757d35479c.hot-update.js.map
