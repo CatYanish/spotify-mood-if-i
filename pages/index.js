@@ -6,7 +6,7 @@ import { CLIENT_ID, REDIRECT_URI } from '../keys';
 import { STATE_KEY, ACCESS_TOKEN } from '../constants';
 
 
-class Blog extends React.Component {
+class Login extends React.Component {
     constructor (props) {
       super(props);
       this.state = {
@@ -16,12 +16,6 @@ class Blog extends React.Component {
       }
     }
 
-    componentDidMount () {
-      console.log(sessionStorage.getItem(ACCESS_TOKEN));
-      // if (sessionStorage.getItem(ACCESS_TOKEN) !== null && sessionStorage.getItem(ACCESS_TOKEN) !== undefined ) {
-      //      window.location = '/playlists';
-      // };
-    }
 
   login () {
     const client_id = CLIENT_ID; // Your client id
@@ -84,4 +78,4 @@ class Blog extends React.Component {
 }
 
 
-export default withRouter(Blog);
+export default withRouter(Login);

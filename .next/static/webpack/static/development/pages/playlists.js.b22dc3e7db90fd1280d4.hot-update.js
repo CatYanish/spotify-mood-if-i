@@ -83,13 +83,17 @@ function (_React$Component) {
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Playlists);
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Playlists).call(this, props));
-    _this.state = {};
+    _this.state = {
+      playlists: null
+    };
     return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_6__["default"])(Playlists, [{
     key: "componentDidMount",
     value: function componentDidMount(props) {
+      var _this2 = this;
+
       function getHashParams() {
         var hashParams = {};
         var e,
@@ -112,12 +116,11 @@ function (_React$Component) {
 
       console.log(access_token);
 
-      if (access_token) {
+      if (!access_token) {
         alert('There was an error during the authentication');
       } else {
         // sessionStorage.removeItem(STATE_KEY);
         if (access_token) {
-          console.log('hiiii');
           fetch('https://api.spotify.com/v1/me', {
             headers: {
               'Authorization': 'Bearer ' + access_token
@@ -131,26 +134,48 @@ function (_React$Component) {
           });
           ;
         }
-      } // console.log(sessionStorage.getItem(ACCESS_TOKEN));
-      // if (sessionStorage.getItem(ACCESS_TOKEN) !== null) {
-      //   const access_token = sessionStorage.getItem(ACCESS_TOKEN);
-      //   console.log(typeof access_token);
-      //   fetch('https://api.spotify.com/v1/me/playlists', {
-      //       headers: {
-      //         'Authorization': 'Bearer ' + access_token
-      //       }
-      //   }).then(res => res.json())
-      //     .then(response => console.log('Success:', JSON.stringify(response)))
-      //     .catch(error => console.error('Error:', error));
-      // } else {
-      //   window.location = "/";
-      // }
+      } // LLO : throw access token in storage, make some API requests and giddy on up
 
+
+      if (access_token !== null) {
+        fetch('https://api.spotify.com/v1/me/playlists', {
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (response) {
+          return _this2.setState({
+            playlists: response.items
+          });
+        }).catch(function (error) {
+          return console.error('Error:', error);
+        });
+      } else {
+        alert("you are not logged in");
+      }
+    }
+  }, {
+    key: "getTrackInfo",
+    value: function getTrackInfo(queryParam) {
+      console.log("called get track info");
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_MyLayout_js__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", null, "Playlists"));
+      var _this3 = this;
+
+      var playlists = this.state.playlists;
+      console.log(playlists);
+      return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_MyLayout_js__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", null, "Playlists"), playlists && playlists.map(function (playlist, index) {
+        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
+          onClick: function onClick() {
+            return _this3.getTrackInfo(playlist.tracks.href);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("img", {
+          src: playlist.images[0].url
+        }));
+      }));
     }
   }]);
 
@@ -162,4 +187,4 @@ function (_React$Component) {
 /***/ })
 
 })
-//# sourceMappingURL=playlists.js.b1c44e4b92a2284f9240.hot-update.js.map
+//# sourceMappingURL=playlists.js.b22dc3e7db90fd1280d4.hot-update.js.map
