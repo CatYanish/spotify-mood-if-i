@@ -14,6 +14,7 @@ export default class Playlists extends React.Component {
     super(props);
     this.state = {
       playlists: null,
+      access_token: null,
     }
   }
 
@@ -37,7 +38,7 @@ export default class Playlists extends React.Component {
     let access_token = params.access_token
         // state = params.state,
         // storedState = sessionStorage.getItem(STATE_KEY);
-   console.log(access_token);
+   this.setState({access_token: access_token});
 
     if (!access_token) {
       alert('There was an error during the authentication');
@@ -55,7 +56,7 @@ export default class Playlists extends React.Component {
     }
 
     if (access_token !== null) {
-      fetch('https://api.spotify.com/v1/me/playlists', {
+      fetch('https://api.spotify.com/v1/me/playlists?limit=50', {
           headers: {
             'Authorization': 'Bearer ' + access_token
           }
@@ -67,10 +68,18 @@ export default class Playlists extends React.Component {
     }
   }
 
-  getTrackInfo (queryParam) {
-    console.log("called get track info query param", queryParam);
-    // llo: throw access token and query param in url, redirec to tracks, make API call
-};
+//   getTrackInfo (queryParam) {
+//     console.log("called get track info query param", queryParam);
+//     // llo: throw access token and query param in url, redirec to tracks, make API call
+
+//     let path = '/tracks';
+//     // url += '?response_type=token';
+//     path += '?access_token=' + encodeURIComponent(this.state.access_token);
+//     // url += '&scope=' + encodeURIComponent(scope);
+//     // url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+//     // url += '&state=' + encodeURIComponent(state);
+//     Router.pushRoute(path)
+// };
 
   render () {
     let playlists = this.state.playlists;
@@ -81,10 +90,16 @@ export default class Playlists extends React.Component {
               <div className="playlistContainer">
                { playlists &&
                  playlists.map((playlist, index) => (
-                    <div className="playlist" key={index} onClick={() => this.getTrackInfo(playlist.tracks.href)}>
-                      <img src={playlist.images[0].url}/>
-                      <p>{playlist.name}</p>
-                    </div>
+                    <Link className="playlist" key={index} href={
+                      '/tracks' + 
+                      '?access_token=' + 
+                      encodeURIComponent(this.state.access_token)
+                      + '&playlist_id=' + playlist.id }>
+                      <div>
+                        <img src={playlist.images[0].url}/>
+                        <p>{playlist.name}</p>
+                      </div>
+                    </Link>
 
                 ))
                }
@@ -105,6 +120,7 @@ export default class Playlists extends React.Component {
                img {
                   height: 300px;
                   width: 300px;
+                  cursor: pointer;
                }
 
                img:hover {

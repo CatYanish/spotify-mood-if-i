@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2272,7 +2272,8 @@ function (_React$Component) {
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Playlists).call(this, props));
     _this.state = {
-      playlists: null
+      playlists: null,
+      access_token: null
     };
     return _this;
   }
@@ -2302,7 +2303,9 @@ function (_React$Component) {
       var access_token = params.access_token; // state = params.state,
       // storedState = sessionStorage.getItem(STATE_KEY);
 
-      console.log(access_token);
+      this.setState({
+        access_token: access_token
+      });
 
       if (!access_token) {
         alert('There was an error during the authentication');
@@ -2325,7 +2328,7 @@ function (_React$Component) {
       }
 
       if (access_token !== null) {
-        fetch('https://api.spotify.com/v1/me/playlists', {
+        fetch('https://api.spotify.com/v1/me/playlists?limit=50', {
           headers: {
             'Authorization': 'Bearer ' + access_token
           }
@@ -2341,12 +2344,18 @@ function (_React$Component) {
       } else {
         alert("you are not logged in");
       }
-    }
-  }, {
-    key: "getTrackInfo",
-    value: function getTrackInfo(queryParam) {
-      console.log("called get track info query param", queryParam); // llo: throw access token and query param in url, redirec to tracks, make API call
-    }
+    } //   getTrackInfo (queryParam) {
+    //     console.log("called get track info query param", queryParam);
+    //     // llo: throw access token and query param in url, redirec to tracks, make API call
+    //     let path = '/tracks';
+    //     // url += '?response_type=token';
+    //     path += '?access_token=' + encodeURIComponent(this.state.access_token);
+    //     // url += '&scope=' + encodeURIComponent(scope);
+    //     // url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+    //     // url += '&state=' + encodeURIComponent(state);
+    //     Router.pushRoute(path)
+    // };
+
   }, {
     key: "render",
     value: function render() {
@@ -2355,25 +2364,25 @@ function (_React$Component) {
       var playlists = this.state.playlists;
       console.log(playlists);
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_MyLayout_js__WEBPACK_IMPORTED_MODULE_9__["default"], null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("p", {
-        className: "jsx-959293798"
+        className: "jsx-2040622383"
       }, "Playlists"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
-        className: "jsx-959293798" + " " + "playlistContainer"
+        className: "jsx-2040622383" + " " + "playlistContainer"
       }, playlists && playlists.map(function (playlist, index) {
-        return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_11___default.a, {
+          className: "playlist",
           key: index,
-          onClick: function onClick() {
-            return _this3.getTrackInfo(playlist.tracks.href);
-          },
-          className: "jsx-959293798" + " " + "playlist"
+          href: '/tracks' + '?access_token=' + encodeURIComponent(_this3.state.access_token) + '&playlist_id=' + playlist.id
+        }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+          className: "jsx-2040622383"
         }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("img", {
           src: playlist.images[0].url,
-          className: "jsx-959293798"
+          className: "jsx-2040622383"
         }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("p", {
-          className: "jsx-959293798"
-        }, playlist.name));
+          className: "jsx-2040622383"
+        }, playlist.name)));
       })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(styled_jsx_style__WEBPACK_IMPORTED_MODULE_8___default.a, {
-        id: "959293798"
-      }, "p.jsx-959293798{font-family:'Arial';font-weight:bold;}.playlistContainer.jsx-959293798{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-flow:wrap;-ms-flex-flow:wrap;flex-flow:wrap;}.playlist.jsx-959293798{-webkit-flex:1;-ms-flex:1;flex:1;}img.jsx-959293798{height:300px;width:300px;}img.jsx-959293798:hover{cursor:pointer;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jYXR5YW5pc2gvcHJvamVjdHMvc3BvdGlmeS1tb29kLWlmLWkvcGFnZXMvcGxheWxpc3RzLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTJGeUIsQUFHc0MsQUFJUCxBQUtOLEFBR08sQUFLQyxhQUpGLEVBS2YsS0FqQm1CLEtBYW5CLFFBSkEsSUFSQSxxQ0FHcUIscUVBQ0oseURBQ2pCIiwiZmlsZSI6Ii9Vc2Vycy9jYXR5YW5pc2gvcHJvamVjdHMvc3BvdGlmeS1tb29kLWlmLWkvcGFnZXMvcGxheWxpc3RzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IExheW91dCBmcm9tICcuLi9jb21wb25lbnRzL015TGF5b3V0LmpzJ1xuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xuaW1wb3J0IExpbmsgZnJvbSAnbmV4dC9saW5rJ1xuaW1wb3J0IFJvdXRlciwgeyB3aXRoUm91dGVyIH0gZnJvbSAnbmV4dC9yb3V0ZXInO1xuaW1wb3J0IHsgQUNDRVNTX1RPS0VOIH0gZnJvbSAnLi4vY29uc3RhbnRzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUGxheWxpc3RzIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgc3RhdGljIGFzeW5jIGdldEluaXRpYWxQcm9wcyh7IHF1ZXJ5IH0pIHtcblxuICAgIHJldHVybiB7fVxuICB9XG5cbiAgY29uc3RydWN0b3IocHJvcHMpIHtcbiAgICBzdXBlcihwcm9wcyk7XG4gICAgdGhpcy5zdGF0ZSA9IHtcbiAgICAgIHBsYXlsaXN0czogbnVsbCxcbiAgICB9XG4gIH1cblxuXG4gIGNvbXBvbmVudERpZE1vdW50IChwcm9wcykge1xuICAgIGZ1bmN0aW9uIGdldEhhc2hQYXJhbXMoKSB7XG4gICAgICB2YXIgaGFzaFBhcmFtcyA9IHt9O1xuXG4gICAgICAgIHZhciBlLCByID0gLyhbXiY7PV0rKT0/KFteJjtdKikvZyxcbiAgICAgICAgICAgIHEgPSB3aW5kb3cubG9jYXRpb24uaGFzaC5zdWJzdHJpbmcoMSk7XG4gICAgICAgIHdoaWxlICggZSA9IHIuZXhlYyhxKSkge1xuICAgICAgICAgICBoYXNoUGFyYW1zW2VbMV1dID0gZGVjb2RlVVJJQ29tcG9uZW50KGVbMl0pO1xuICAgICAgICB9XG5cbiAgICAgIHJldHVybiBoYXNoUGFyYW1zO1xuICAgIH1cblxuXG4gICAgbGV0IHBhcmFtcyA9IGdldEhhc2hQYXJhbXMoKTtcbiAgICBjb25zb2xlLmxvZyh7cGFyYW1zfSk7XG4gICAgbGV0IGFjY2Vzc190b2tlbiA9IHBhcmFtcy5hY2Nlc3NfdG9rZW5cbiAgICAgICAgLy8gc3RhdGUgPSBwYXJhbXMuc3RhdGUsXG4gICAgICAgIC8vIHN0b3JlZFN0YXRlID0gc2Vzc2lvblN0b3JhZ2UuZ2V0SXRlbShTVEFURV9LRVkpO1xuICAgY29uc29sZS5sb2coYWNjZXNzX3Rva2VuKTtcblxuICAgIGlmICghYWNjZXNzX3Rva2VuKSB7XG4gICAgICBhbGVydCgnVGhlcmUgd2FzIGFuIGVycm9yIGR1cmluZyB0aGUgYXV0aGVudGljYXRpb24nKTtcbiAgICB9IGVsc2Uge1xuICAgICAgLy8gc2Vzc2lvblN0b3JhZ2UucmVtb3ZlSXRlbShTVEFURV9LRVkpO1xuICAgICAgaWYgKGFjY2Vzc190b2tlbikge1xuICAgICAgICBmZXRjaCgnaHR0cHM6Ly9hcGkuc3BvdGlmeS5jb20vdjEvbWUnLCB7XG4gICAgICAgICAgICBoZWFkZXJzOiB7XG4gICAgICAgICAgICAgICdBdXRob3JpemF0aW9uJzogJ0JlYXJlciAnICsgYWNjZXNzX3Rva2VuXG4gICAgICAgICAgICB9XG4gICAgICAgIH0pLnRoZW4ocmVzID0+IHJlcy5qc29uKCkpXG4gICAgICAgICAgLnRoZW4ocmVzcG9uc2UgPT4gY29uc29sZS5sb2coJ1N1Y2Nlc3M6JywgSlNPTi5zdHJpbmdpZnkocmVzcG9uc2UpKSlcbiAgICAgICAgICAuY2F0Y2goZXJyb3IgPT4gY29uc29sZS5lcnJvcignRXJyb3I6JywgZXJyb3IpKTs7XG4gICAgICB9XG4gICAgfVxuXG4gICAgaWYgKGFjY2Vzc190b2tlbiAhPT0gbnVsbCkge1xuICAgICAgZmV0Y2goJ2h0dHBzOi8vYXBpLnNwb3RpZnkuY29tL3YxL21lL3BsYXlsaXN0cycsIHtcbiAgICAgICAgICBoZWFkZXJzOiB7XG4gICAgICAgICAgICAnQXV0aG9yaXphdGlvbic6ICdCZWFyZXIgJyArIGFjY2Vzc190b2tlblxuICAgICAgICAgIH1cbiAgICAgIH0pLnRoZW4ocmVzID0+IHJlcy5qc29uKCkpXG4gICAgICAgIC50aGVuKHJlc3BvbnNlID0+IHRoaXMuc2V0U3RhdGUoe3BsYXlsaXN0czogcmVzcG9uc2UuaXRlbXN9KSlcbiAgICAgICAgLmNhdGNoKGVycm9yID0+IGNvbnNvbGUuZXJyb3IoJ0Vycm9yOicsIGVycm9yKSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIGFsZXJ0KFwieW91IGFyZSBub3QgbG9nZ2VkIGluXCIpO1xuICAgIH1cbiAgfVxuXG4gIGdldFRyYWNrSW5mbyAocXVlcnlQYXJhbSkge1xuICAgIGNvbnNvbGUubG9nKFwiY2FsbGVkIGdldCB0cmFjayBpbmZvIHF1ZXJ5IHBhcmFtXCIsIHF1ZXJ5UGFyYW0pO1xuICAgIC8vIGxsbzogdGhyb3cgYWNjZXNzIHRva2VuIGFuZCBxdWVyeSBwYXJhbSBpbiB1cmwsIHJlZGlyZWMgdG8gdHJhY2tzLCBtYWtlIEFQSSBjYWxsXG59O1xuXG4gIHJlbmRlciAoKSB7XG4gICAgbGV0IHBsYXlsaXN0cyA9IHRoaXMuc3RhdGUucGxheWxpc3RzO1xuICAgIGNvbnNvbGUubG9nKHBsYXlsaXN0cyk7XG4gICAgcmV0dXJuICAoXG4gICAgICAgICAgPExheW91dD5cbiAgICAgICAgICAgICA8cD5QbGF5bGlzdHM8L3A+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicGxheWxpc3RDb250YWluZXJcIj5cbiAgICAgICAgICAgICAgIHsgcGxheWxpc3RzICYmXG4gICAgICAgICAgICAgICAgIHBsYXlsaXN0cy5tYXAoKHBsYXlsaXN0LCBpbmRleCkgPT4gKFxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInBsYXlsaXN0XCIga2V5PXtpbmRleH0gb25DbGljaz17KCkgPT4gdGhpcy5nZXRUcmFja0luZm8ocGxheWxpc3QudHJhY2tzLmhyZWYpfT5cbiAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz17cGxheWxpc3QuaW1hZ2VzWzBdLnVybH0vPlxuICAgICAgICAgICAgICAgICAgICAgIDxwPntwbGF5bGlzdC5uYW1lfTwvcD5cbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgICApKVxuICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgPHN0eWxlIGpzeD57YFxuICAgICAgICAgICAgICAgcCB7XG4gICAgICAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnQXJpYWwnO1xuICAgICAgICAgICAgICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgIC5wbGF5bGlzdENvbnRhaW5lciB7XG4gICAgICAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgICAgICAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgICAgICAgICAgICAgIGZsZXgtZmxvdzogd3JhcDtcbiAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgIC5wbGF5bGlzdCB7XG4gICAgICAgICAgICAgICAgIGZsZXg6IDE7XG4gICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICBpbWcge1xuICAgICAgICAgICAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgICAgICAgICAgIHdpZHRoOiAzMDBweDtcbiAgICAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgICAgaW1nOmhvdmVyIHtcbiAgICAgICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgIGB9PC9zdHlsZT5cbiAgICAgICAgICA8L0xheW91dD5cbiAgICAgIClcbiAgfVxufVxuIl19 */\n/*@ sourceURL=/Users/catyanish/projects/spotify-mood-if-i/pages/playlists.js */"));
+        id: "2040622383"
+      }, "p.jsx-2040622383{font-family:'Arial';font-weight:bold;}.playlistContainer.jsx-2040622383{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-flex-flow:wrap;-ms-flex-flow:wrap;flex-flow:wrap;}.playlist.jsx-2040622383{-webkit-flex:1;-ms-flex:1;flex:1;}img.jsx-2040622383{height:300px;width:300px;cursor:pointer;}img.jsx-2040622383:hover{cursor:pointer;}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9jYXRoZXJpbmV5YW5pc2gvcHJvamVjdGl0YXMvc3BvdGlmeS1tb29kLWlmLWkvcGFnZXMvcGxheWxpc3RzLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTBHeUIsQUFHc0MsQUFJUCxBQUtOLEFBR08sQUFNQyxhQUxGLEVBTWYsS0FsQm1CLEtBYUQsUUFKbEIsSUFSQSxHQWFBLGtDQVZxQixxRUFDSix5REFDakIiLCJmaWxlIjoiL1VzZXJzL2NhdGhlcmluZXlhbmlzaC9wcm9qZWN0aXRhcy9zcG90aWZ5LW1vb2QtaWYtaS9wYWdlcy9wbGF5bGlzdHMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgTGF5b3V0IGZyb20gJy4uL2NvbXBvbmVudHMvTXlMYXlvdXQuanMnXG5pbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnXG5pbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnXG5pbXBvcnQgUm91dGVyLCB7IHdpdGhSb3V0ZXIgfSBmcm9tICduZXh0L3JvdXRlcic7XG5pbXBvcnQgeyBBQ0NFU1NfVE9LRU4gfSBmcm9tICcuLi9jb25zdGFudHMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBQbGF5bGlzdHMgZXh0ZW5kcyBSZWFjdC5Db21wb25lbnQge1xuICBzdGF0aWMgYXN5bmMgZ2V0SW5pdGlhbFByb3BzKHsgcXVlcnkgfSkge1xuXG4gICAgcmV0dXJuIHt9XG4gIH1cblxuICBjb25zdHJ1Y3Rvcihwcm9wcykge1xuICAgIHN1cGVyKHByb3BzKTtcbiAgICB0aGlzLnN0YXRlID0ge1xuICAgICAgcGxheWxpc3RzOiBudWxsLFxuICAgICAgYWNjZXNzX3Rva2VuOiBudWxsLFxuICAgIH1cbiAgfVxuXG5cbiAgY29tcG9uZW50RGlkTW91bnQgKHByb3BzKSB7XG4gICAgZnVuY3Rpb24gZ2V0SGFzaFBhcmFtcygpIHtcbiAgICAgIHZhciBoYXNoUGFyYW1zID0ge307XG5cbiAgICAgICAgdmFyIGUsIHIgPSAvKFteJjs9XSspPT8oW14mO10qKS9nLFxuICAgICAgICAgICAgcSA9IHdpbmRvdy5sb2NhdGlvbi5oYXNoLnN1YnN0cmluZygxKTtcbiAgICAgICAgd2hpbGUgKCBlID0gci5leGVjKHEpKSB7XG4gICAgICAgICAgIGhhc2hQYXJhbXNbZVsxXV0gPSBkZWNvZGVVUklDb21wb25lbnQoZVsyXSk7XG4gICAgICAgIH1cblxuICAgICAgcmV0dXJuIGhhc2hQYXJhbXM7XG4gICAgfVxuXG5cbiAgICBsZXQgcGFyYW1zID0gZ2V0SGFzaFBhcmFtcygpO1xuICAgIGNvbnNvbGUubG9nKHtwYXJhbXN9KTtcbiAgICBsZXQgYWNjZXNzX3Rva2VuID0gcGFyYW1zLmFjY2Vzc190b2tlblxuICAgICAgICAvLyBzdGF0ZSA9IHBhcmFtcy5zdGF0ZSxcbiAgICAgICAgLy8gc3RvcmVkU3RhdGUgPSBzZXNzaW9uU3RvcmFnZS5nZXRJdGVtKFNUQVRFX0tFWSk7XG4gICB0aGlzLnNldFN0YXRlKHthY2Nlc3NfdG9rZW46IGFjY2Vzc190b2tlbn0pO1xuXG4gICAgaWYgKCFhY2Nlc3NfdG9rZW4pIHtcbiAgICAgIGFsZXJ0KCdUaGVyZSB3YXMgYW4gZXJyb3IgZHVyaW5nIHRoZSBhdXRoZW50aWNhdGlvbicpO1xuICAgIH0gZWxzZSB7XG4gICAgICAvLyBzZXNzaW9uU3RvcmFnZS5yZW1vdmVJdGVtKFNUQVRFX0tFWSk7XG4gICAgICBpZiAoYWNjZXNzX3Rva2VuKSB7XG4gICAgICAgIGZldGNoKCdodHRwczovL2FwaS5zcG90aWZ5LmNvbS92MS9tZScsIHtcbiAgICAgICAgICAgIGhlYWRlcnM6IHtcbiAgICAgICAgICAgICAgJ0F1dGhvcml6YXRpb24nOiAnQmVhcmVyICcgKyBhY2Nlc3NfdG9rZW5cbiAgICAgICAgICAgIH1cbiAgICAgICAgfSkudGhlbihyZXMgPT4gcmVzLmpzb24oKSlcbiAgICAgICAgICAudGhlbihyZXNwb25zZSA9PiBjb25zb2xlLmxvZygnU3VjY2VzczonLCBKU09OLnN0cmluZ2lmeShyZXNwb25zZSkpKVxuICAgICAgICAgIC5jYXRjaChlcnJvciA9PiBjb25zb2xlLmVycm9yKCdFcnJvcjonLCBlcnJvcikpOztcbiAgICAgIH1cbiAgICB9XG5cbiAgICBpZiAoYWNjZXNzX3Rva2VuICE9PSBudWxsKSB7XG4gICAgICBmZXRjaCgnaHR0cHM6Ly9hcGkuc3BvdGlmeS5jb20vdjEvbWUvcGxheWxpc3RzP2xpbWl0PTUwJywge1xuICAgICAgICAgIGhlYWRlcnM6IHtcbiAgICAgICAgICAgICdBdXRob3JpemF0aW9uJzogJ0JlYXJlciAnICsgYWNjZXNzX3Rva2VuXG4gICAgICAgICAgfVxuICAgICAgfSkudGhlbihyZXMgPT4gcmVzLmpzb24oKSlcbiAgICAgICAgLnRoZW4ocmVzcG9uc2UgPT4gdGhpcy5zZXRTdGF0ZSh7cGxheWxpc3RzOiByZXNwb25zZS5pdGVtc30pKVxuICAgICAgICAuY2F0Y2goZXJyb3IgPT4gY29uc29sZS5lcnJvcignRXJyb3I6JywgZXJyb3IpKTtcbiAgICB9IGVsc2Uge1xuICAgICAgYWxlcnQoXCJ5b3UgYXJlIG5vdCBsb2dnZWQgaW5cIik7XG4gICAgfVxuICB9XG5cbi8vICAgZ2V0VHJhY2tJbmZvIChxdWVyeVBhcmFtKSB7XG4vLyAgICAgY29uc29sZS5sb2coXCJjYWxsZWQgZ2V0IHRyYWNrIGluZm8gcXVlcnkgcGFyYW1cIiwgcXVlcnlQYXJhbSk7XG4vLyAgICAgLy8gbGxvOiB0aHJvdyBhY2Nlc3MgdG9rZW4gYW5kIHF1ZXJ5IHBhcmFtIGluIHVybCwgcmVkaXJlYyB0byB0cmFja3MsIG1ha2UgQVBJIGNhbGxcblxuLy8gICAgIGxldCBwYXRoID0gJy90cmFja3MnO1xuLy8gICAgIC8vIHVybCArPSAnP3Jlc3BvbnNlX3R5cGU9dG9rZW4nO1xuLy8gICAgIHBhdGggKz0gJz9hY2Nlc3NfdG9rZW49JyArIGVuY29kZVVSSUNvbXBvbmVudCh0aGlzLnN0YXRlLmFjY2Vzc190b2tlbik7XG4vLyAgICAgLy8gdXJsICs9ICcmc2NvcGU9JyArIGVuY29kZVVSSUNvbXBvbmVudChzY29wZSk7XG4vLyAgICAgLy8gdXJsICs9ICcmcmVkaXJlY3RfdXJpPScgKyBlbmNvZGVVUklDb21wb25lbnQocmVkaXJlY3RfdXJpKTtcbi8vICAgICAvLyB1cmwgKz0gJyZzdGF0ZT0nICsgZW5jb2RlVVJJQ29tcG9uZW50KHN0YXRlKTtcbi8vICAgICBSb3V0ZXIucHVzaFJvdXRlKHBhdGgpXG4vLyB9O1xuXG4gIHJlbmRlciAoKSB7XG4gICAgbGV0IHBsYXlsaXN0cyA9IHRoaXMuc3RhdGUucGxheWxpc3RzO1xuICAgIGNvbnNvbGUubG9nKHBsYXlsaXN0cyk7XG4gICAgcmV0dXJuICAoXG4gICAgICAgICAgPExheW91dD5cbiAgICAgICAgICAgICA8cD5QbGF5bGlzdHM8L3A+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicGxheWxpc3RDb250YWluZXJcIj5cbiAgICAgICAgICAgICAgIHsgcGxheWxpc3RzICYmXG4gICAgICAgICAgICAgICAgIHBsYXlsaXN0cy5tYXAoKHBsYXlsaXN0LCBpbmRleCkgPT4gKFxuICAgICAgICAgICAgICAgICAgICA8TGluayBjbGFzc05hbWU9XCJwbGF5bGlzdFwiIGtleT17aW5kZXh9IGhyZWY9e1xuICAgICAgICAgICAgICAgICAgICAgICcvdHJhY2tzJyArIFxuICAgICAgICAgICAgICAgICAgICAgICc/YWNjZXNzX3Rva2VuPScgKyBcbiAgICAgICAgICAgICAgICAgICAgICBlbmNvZGVVUklDb21wb25lbnQodGhpcy5zdGF0ZS5hY2Nlc3NfdG9rZW4pXG4gICAgICAgICAgICAgICAgICAgICAgKyAnJnBsYXlsaXN0X2lkPScgKyBwbGF5bGlzdC5pZCB9PlxuICAgICAgICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz17cGxheWxpc3QuaW1hZ2VzWzBdLnVybH0vPlxuICAgICAgICAgICAgICAgICAgICAgICAgPHA+e3BsYXlsaXN0Lm5hbWV9PC9wPlxuICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8L0xpbms+XG5cbiAgICAgICAgICAgICAgICApKVxuICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgPHN0eWxlIGpzeD57YFxuICAgICAgICAgICAgICAgcCB7XG4gICAgICAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnQXJpYWwnO1xuICAgICAgICAgICAgICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgIC5wbGF5bGlzdENvbnRhaW5lciB7XG4gICAgICAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgICAgICAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgICAgICAgICAgICAgIGZsZXgtZmxvdzogd3JhcDtcbiAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgIC5wbGF5bGlzdCB7XG4gICAgICAgICAgICAgICAgIGZsZXg6IDE7XG4gICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICBpbWcge1xuICAgICAgICAgICAgICAgICAgaGVpZ2h0OiAzMDBweDtcbiAgICAgICAgICAgICAgICAgIHdpZHRoOiAzMDBweDtcbiAgICAgICAgICAgICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgICAgaW1nOmhvdmVyIHtcbiAgICAgICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgIGB9PC9zdHlsZT5cbiAgICAgICAgICA8L0xheW91dD5cbiAgICAgIClcbiAgfVxufVxuIl19 */\n/*@ sourceURL=/Users/catherineyanish/projectitas/spotify-mood-if-i/pages/playlists.js */"));
     }
   }]);
 
@@ -2384,14 +2393,14 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!**********************************!*\
   !*** multi ./pages/playlists.js ***!
   \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/catyanish/projects/spotify-mood-if-i/pages/playlists.js */"./pages/playlists.js");
+module.exports = __webpack_require__(/*! /Users/catherineyanish/projectitas/spotify-mood-if-i/pages/playlists.js */"./pages/playlists.js");
 
 
 /***/ }),
