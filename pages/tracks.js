@@ -2,7 +2,7 @@ import Layout from '../components/MyLayout.js'
 import React from 'react'
 import Link from 'next/link'
 import Router, { withRouter } from 'next/router';
-import { ACCESS_TOKEN } from '../constants';
+import Chart from 'chart.js';
 
 export default class Tracks extends React.Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export default class Tracks extends React.Component {
     this.state = {
       tracks: null,
       access_token: null,
+      trackObjects: null,
     }
   }
 
@@ -57,7 +58,7 @@ export default class Tracks extends React.Component {
 
   createTrackInfoObject = (audioFeatures) => {
     const tracklist = this.state.tracks
-    console.log(tracklist);
+    // console.log(tracklist);
     
     for (let i = 0; i < audioFeatures.length; i++) {
       for (let j = 0; j < this.state.tracks.length; j++) {        
@@ -71,43 +72,76 @@ export default class Tracks extends React.Component {
         }
       }      
     }
-    console.log(this.trackObjects);
-    
+    // console.log(this.trackObjects);
+    const trackObjectsArray = this.trackObjects.map((track, index) => (
+      {
+        "label": [track.name, track.artist],
+        "data": [{
+          "x": track.valence,
+          "y": track.danceability,
+        }]
+      }
+    ))
+
+
+      this.setState({trackObjects: trackObjectsArray})
   }
 
 
   render () {
+    var ctx = typeof window !== 'undefined' && 
+              typeof window !== 'undefined' && document.getElementById('myChart') &&
+              document.getElementById('myChart').getContext("2d");
+    var scatterChart = (typeof window !== 'undefined' && this.state.trackObjects !== null) && new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: this.state.trackObjects,
+        },
+        options: {
+            title: {
+              display: true,
+              text: 'Songs By Happiness and Danceability'
+            }, 
+            scales: {
+              yAxes: [{ 
+                scaleLabel: {
+                  display: true,
+                  labelString: "Happiness"
+                }
+              }],
+              xAxes: [{ 
+                scaleLabel: {
+                  display: true,
+                  labelString: "Danceability"
+                }
+              }]
+            },
+            tooltips: {
+              callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                      return {
+                          borderColor: 'rgb(255, 0, 0)',
+                          backgroundColor: 'rgb(255, 0, 0)'
+                      };
+                  },
+                  labelTextColor: function(tooltipItem, chart) {
+                      return 'white';
+                  },
+                  label: function(tooltipItem, data) {
+                    return data.datasets[tooltipItem.datasetIndex].label || '';
+                }
+              }
+            },
+        }
+    });
 
-    // var scatterChart = new Chart(ctx, {
-    //     type: 'scatter',
-    //     data: {
-    //         datasets: [{
-    //             label: 'Scatter Dataset',
-    //             data: [{
-    //                 x: -10,
-    //                 y: 0
-    //             }, {
-    //                 x: 0,
-    //                 y: 10
-    //             }, {
-    //                 x: 10,
-    //                 y: 5
-    //             }]
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             xAxes: [{
-    //                 type: 'linear',
-    //                 position: 'bottom'
-    //             }]
-    //         }
-    //     }
-    // });
+    console.log({scatterChart});
+    
 
     return  (
           <Layout>
              <p>Tracks</p>
+             <canvas id="myChart" width="400" height="400"></canvas>
           </Layout>
       )
   }

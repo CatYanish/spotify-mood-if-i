@@ -1,8 +1,6 @@
 import Layout from '../components/MyLayout.js'
 import React from 'react'
 import Link from 'next/link'
-import Router, { withRouter } from 'next/router';
-import { ACCESS_TOKEN } from '../constants';
 
 export default class Playlists extends React.Component {
   static async getInitialProps({ query }) {
@@ -36,8 +34,6 @@ export default class Playlists extends React.Component {
     let params = getHashParams();
     console.log({params});
     let access_token = params.access_token
-        // state = params.state,
-        // storedState = sessionStorage.getItem(STATE_KEY);
    this.setState({access_token: access_token});
 
     if (!access_token) {
@@ -67,19 +63,6 @@ export default class Playlists extends React.Component {
       alert("you are not logged in");
     }
   }
-
-//   getTrackInfo (queryParam) {
-//     console.log("called get track info query param", queryParam);
-//     // llo: throw access token and query param in url, redirec to tracks, make API call
-
-//     let path = '/tracks';
-//     // url += '?response_type=token';
-//     path += '?access_token=' + encodeURIComponent(this.state.access_token);
-//     // url += '&scope=' + encodeURIComponent(scope);
-//     // url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-//     // url += '&state=' + encodeURIComponent(state);
-//     Router.pushRoute(path)
-// };
 
   render () {
     let playlists = this.state.playlists;

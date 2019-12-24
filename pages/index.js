@@ -20,9 +20,6 @@ class Login extends React.Component {
   login () {
     const client_id = CLIENT_ID; // Your client id
     const redirect_uri = REDIRECT_URI; // Your redirect uri
-
-    console.log(client_id);
-    console.log(redirect_uri);
     
     function generateRandomString(length) {
       var text = '';
@@ -45,7 +42,6 @@ class Login extends React.Component {
     url += '&state=' + encodeURIComponent(state);
 
     window.location = url;
-    // handleLoginParams();
   }
 
 
